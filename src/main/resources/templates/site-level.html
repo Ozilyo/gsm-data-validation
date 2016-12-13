@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+
+<script src="jquery.js"></script>
+<script src="words.js"></script>
+<script src="comparison.js"></script>
+<script src="parsley.js"></script>
+<style type="text/css">
+input.parsley-success, select.parsley-success, textarea.parsley-success
+	{
+	color: #468847;
+	background-color: #DFF0D8;
+	border: 1px solid #D6E9C6;
+}
+
+input.parsley-error, select.parsley-error, textarea.parsley-error {
+	color: #B94A48;
+	background-color: #F2DEDE;
+	border: 1px solid #EED3D7;
+}
+
+.parsley-errors-list {
+	margin: 2px 0 3px;
+	padding: 0;
+	list-style-type: none;
+	font-size: 0.9em;
+	line-height: 0.9em;
+	opacity: 0;
+	transition: all .3s ease-in;
+	-o-transition: all .3s ease-in;
+	-moz-transition: all .3s ease-in;
+	-webkit-transition: all .3s ease-in;
+}
+
+.parsley-errors-list.filled {
+	opacity: 1;
+}
+</style>
+</head>
+<body>
+	<h2 align="center">Data Entry Form</h2>
+	
+	<form id="form" data-parsley-validate >
+		<table style="width: 100%; border-collapse: separate; position: ">
+			<thead>
+				<tr>
+					<td>Cell Name</td>
+					<td>Site Name</td>
+					<td>LAC (Location area code)</td>
+					<td>CID (Cell ID)</td>
+					<td>Status</td>
+					<td>Azimuth</td>
+					<td>Fixed E Tilt</td>
+					<td>E Tilt</td>
+					<td>M Tilt</td>
+					<td>Antenna Height on Pole</td>
+					<td>Antenna Height from Ground</td>
+					<td>Feeder Length</td>
+					<td>Feeder Type</td>
+					<td>Antenna Model</td>
+					<td>Comment</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<div><input type="text" readonly disabled></div>
+					</td>
+					<td>
+						<div><input type="text" readonly disabled></div>
+					</td>
+					<td>
+						<div><input type="text" readonly disabled></div>
+					</td>
+					<td>
+						<div><input type="text" readonly disabled></div>
+					</td>
+					<td>
+						<div><input type="text" readonly disabled></div>
+					</td>
+					
+<!-- 					USER INPUTS ##################-->
+					
+					<td>
+						<div><input  required type="number" data-parsley-range="[6, 10]" data-parsely-multiple-of="5"></div>
+					</td>
+					<td>
+						<div><input id="fixed-e-tilt" type="number" ></div>
+					</td>
+					<td>
+						<div><input id="e-tilt" type="number" ></div>
+					</td>
+					<td>
+						<div><input id="m-tilt" type="number" ></div>
+					</td>
+					<td>
+						<div><input id="ant-h-on-pole" type="number" ></div>
+					</td>
+					<td>
+						<div><input id="ant-h-from-grd" type="number" ></div>
+					</td>
+					<td>
+						<div><input id="feeder-length" type="number" ></div>
+					</td>
+					<td>
+						<div><input type="number" ></div>
+					</td>
+					<td>
+						<div><input type="number" ></div>
+					</td>
+					<td>
+						<div><input type="number" ></div>
+					</td>
+				</tr>
+				<tr>
+					<td><input type="submit"></td>
+				</tr>
+			</tbody>
+		</table>
+		<input type="submit">
+	</form>
+	
+	
+	
+	<form action="post" data-parsley-validate>
+		<table>
+			<thead>
+				<tr>
+					<td>Site Name</td>
+					<td>Site ID</td>
+					<td>Longitude</td>
+					<td>Latitude</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><div style="height: 50px;">
+							<input type="text" data-required="true">
+</td>></td>
+					<td><div style="height: 50px;">
+							<input type="number" data-parsley-type="integer"
+								data-parsley-type-message="Only enter integer values"
+								data-parsley-range="[6, 10]" required>
+						</div></td>
+					<td><div style="height: 50px;">
+							<input type="number" required="required">
+						</div></td>
+					<td><div style="height: 50px;">
+							<input type="number" required="required" />
+						</div></td>
+
+				</tr>
+
+				<tr>
+					<td><input type="submit"></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+
+	<form id="form2" data-parsley-validate="">
+		<input type="text" data-parsley-trigger="input" class="form-control"
+			data-required="true"> <input type="text"
+			data-parsley-range="[6, 10]"> <input type="text"> <input
+			type="text"> <input type="submit">
+		<p>
+			<label for="message">Message (20 chars min, 100 max) :</label>
+			<textarea id="message" class="form-control" name="message"
+				data-parsley-trigger="keyup" data-parsley-minlength="20"
+				data-parsley-maxlength="100"
+				data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.."
+				data-parsley-validation-threshold="10"></textarea>
+		</p>
+
+		<br> <input type="submit">
+	</form>
+
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 table-responsive">
+				<table class="table table-bordered table-hover table-sortable"
+					id="tab_logic">
+					<thead>
+						<tr>
+							<th class="text-center">Site Name</th>
+							<th class="text-center">Site ID</th>
+							<th class="text-center">Longitude</th>
+							<th class="text-center">Latitude</th>
+							<th class="text-center"
+								style="border-top: 1px solid #ffffff; border-right: 1px solid #ffffff;">
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr id='addr0' data-id="0">
+							<td data-name="name"><input type="text" name='name0'
+								placeholder='Name' class="form-control" /></td>
+							<td data-name="id"><input type="text" name='mail0'
+								placeholder='Email' class="form-control" /></td>
+							<td data-name="desc"><textarea name="desc0"
+									placeholder="Description" class="form-control"></textarea></td>
+							<td data-name="sel"><select name="sel0">
+									<optionvalue"">Select Option</option>
+    					        <option value"1">Option 1</option>
+        				        <option value"2">Option 2</option>
+        				        <option value"3">Option 3</option>
+						    </select></td>
+							<td data-name="del">
+								<button
+									nam"del0" class='btn btn-danger glyphicon glyphicon-remove row-remove'></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<a id="add_row" class="btn btn-default pull-right">Add Row</a>
+	</div>
+
+
+	<script type="text/javascript">
+		$('#form').parsley();
+		$('#form2').parsley();
+		.on('form:submit', function() {
+    return false; // Don't submit form for this demo
+  });
+	</script>
+</body>
+</html>
