@@ -50,30 +50,58 @@ input.parsley-error, select.parsley-error, textarea.parsley-error {
 }
 
 td, th {
-	align: center;
-	font-size: small;
+	font-size: .8em;
+	text-align: center;
 }
 
 body {
- 	background-color: #f2f2f2; 
+	background-color: #f2f2f2;
 }
 
-tbody{
+tbody {
 	background-color: #fff;
 }
 
+input {
+	max-width: 100%;
+}
+
+img {
+	background-color: white;
+	transition:
+}
+
+#nav-elements>li {
+	margin-top: 10px
+}
+
+li>a {
+	font-size: medium;
+	font-variant: small-caps;
+	font-stretch: wider;
+}
+
+#site-form {
+	border-color: black;
+	border: 1px;
+}
+
+input {
+	text-align: center;
+}
 </style>
 
 </head>
 <body>
 	<div class="container-fluid">
 		<nav class="navbar navbar-inverse">
-			<div class="container-fluid">
+			<div class="container-fluid" style="padding-left: 0px;">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#">WebSiteName</a>
+					<img alt="STS" src="img/sabal_telcom.png" class="img-thumbnail"
+						width="115" height="50">
+					<!-- 					<a class="navbar-brand" href="#">WebSiteName</a> -->
 				</div>
-				<ul class="nav navbar-nav">
-					<li><a href="#">Home</a></li>
+				<ul id="nav-elements" class="nav navbar-nav">
 					<li><a href="#">2G Site Level</a></li>
 					<li><a href="#">3G Site Level</a></li>
 					<li><a href="#">2G Cell Level</a></li>
@@ -87,352 +115,243 @@ tbody{
 			<h2>Cell Data Entry Form</h2>
 		</div>
 
-		<div class="container-fluid">
+		<div id="site-form" class="container-fluid">
 			<h3>Site Info:</h3>
 			<form class="form" data-parsley-validate>
 				<div class="input-group input-group-md">
-					<span class="input-group-addon" style="width: 100px;">Site Name</span>
-					<input type="text" class="form-control" disabled value="BNL-Damazin-03-W-368">
+					<span class="input-group-addon" style="width: 100px;">Site
+						Name</span> <input type="text" class="form-control" disabled
+						value="BNL-Damazin-03-W-368">
 				</div>
 				<div class="input-group input-group-md">
-					<span class="input-group-addon"
-						style="width: 100px;">
-						Site ID
-					</span>
-					<input type="text" class="form-control" readonly value="368">
+					<span class="input-group-addon" style="width: 100px;"> Site
+						ID </span> <input type="text" class="form-control" readonly value="368">
 				</div>
 				<div class="input-group input-group-md">
-					<span class="input-group-addon"
-						style="width: 100px;">
-						Longitude
-					</span>
-					<input type="digit" class="form-control" placeholder="11.8241">
+					<span class="input-group-addon" style="width: 100px;">
+						Longitude </span> <input type="digit" class="form-control"
+						placeholder="11.8241">
 				</div>
 				<div class="input-group input-group-md">
-					<span class="input-group-addon"
-						style="width: 100px;">
-						Latitude
-					</span>
-					<input type="text" class="form-control" placeholder="34.3644">
+					<span class="input-group-addon" style="width: 100px;">
+						Latitude </span> <input type="text" class="form-control"
+						placeholder="34.3644">
 				</div>
 				<br>
-				<input class="btn btn-primary" type="submit" value="Edit">
+				<div class="btn-group" role="group" aria-label="...">
+					<button type="submit" class="btn btn-primary">Edit</button>
+					<button type="reset" class="btn btn-default">Reset</button>
+				</div>
 			</form>
 		</div>
-		
-		<br><br>
+
+		<br> <br>
 
 		<div class="container-fluid">
 			<h3>Cells</h3>
 			<form data-parsley-validate style="width: 100%">
 				<div class="table-responsive">
-					<table id="data-table" class="table table-striped table-hover" style="width: 100%;">
-						<thead class="thead-inverse">
+					<table id="data-table" class="table table-striped table-hover"
+						style="width: 100%;">
+						<thead class="">
 							<tr>
-								<th align="center">Cell Name</th>
-								<th align="center">LAC</th>
-								<th align="center">CID</th>
-								<th align="center">Status</th>
-								<th align="center">Azimuth</th>
-								<th align="center">Fixed E Tilt</th>
-								<th align="center">E Tilt</th>
-								<th align="center">M Tilt</th>
-								<th align="center">Antenna Height on Pole</th>
-								<th align="center">Antenna Height from Ground</th>
-								<th align="center">Feeder Length</th>
-								<th align="center">Feeder Type</th>
-								<th align="center">Antenna Model</th>
-								<th align="center">Comment</th>
+								<th style="width: 5em" align="center">Cell Name</th>
+								<th style="width: 5em" align="center">LAC</th>
+								<th style="width: 5em" align="center">CID</th>
+								<th style="width: 5em" align="center">Status</th>
+								<th style="width: 5em" align="center">Azimuth</th>
+								<th style="width: 5em" align="center">Fixed E Tilt</th>
+								<th style="width: 5em" align="center">E Tilt</th>
+								<th style="width: 5em" align="center">M Tilt</th>
+								<th style="width: 7em" align="center">Ant. Height on Pole</th>
+								<th style="width: 5em" align="center">Ant. Height from
+									Ground</th>
+								<th style="width: 5em" align="center">Feeder Length</th>
+								<th style="width: 5em" align="center">Feeder Type</th>
+								<th style="width: 5em" align="center">Ant. Model</th>
+								<th style="width: 5em" align="center">Comment</th>
+								<th style="width: 5em; text-align: left" align="left">upload
+									pictures</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>
-									<div>
-										<input size="22" type="text" value="BNL-Damazin -03-W-3680"
-											readonly disabled>
-									</div>
-								</td>
+								<td><input size="22" type="text"
+									value="BNL-Damazin -03-W-3680" readonly disabled></td>
 								<!-- 					<td> -->
-								<!-- 						<div><input type="text" readonly disabled></div> -->
+								<!-- 						<input type="text" readonly disabled> -->
 								<!-- 					</td> -->
-								<td>
-									<div>
-										<input size="1" type="text" value="21" readonly disabled>
-									</div>
-								</td>
-								<td>
-									<div>
-										<input size="1" type="text" value="3680" readonly disabled>
-									</div>
-								</td>
-								<td>
-									<div>
-										<input size="2" type="text" value="Active" readonly disabled>
-									</div>
-								</td>
+								<td><input size="3" type="text" value="21" readonly
+									disabled></td>
+								<td><input size="1" type="text" value="3680" readonly
+									disabled></td>
+								<td><input size="2" type="text" value="Active" readonly
+									disabled></td>
 
 								<!-- 					USER INPUTS ##################-->
 
 								<td>
 									<div>
-										<input size="10" id="azimuth" required type="number"
+										<input style="width: 7em" id="azimuth" required type="number"
 											data-parsley-range="[0, 360]" data-parsely-multiple-of="5">
 									</div>
+
 								</td>
 								<td>
 									<div>
-										<input size="10" id="fixed-e-tilt" type="checkbox">
+										<input id="fixed-e-tilt" type="checkbox">
 									</div>
 								</td>
 								<td>
 									<div>
-										<input size="10" id="e-tilt" type="number"
+										<input style="width: 7em" id="e-tilt" type="number"
 											data-parsley-range="[0, 12]">
 									</div>
 								</td>
 								<td>
 									<div>
-										<input size="10" id="m-tilt" type="number"
+										<input style="width: 7em" id="m-tilt" type="number"
 											data-parsley-range="[-10, 20]">
 									</div>
 								</td>
 								<td>
 									<div>
-										<input size="10" id="ant-h-on-pole" type="number"
+										<input style="width: 7em" id="ant-h-on-pole" type="number"
 											data-parsley-range="[0, 100]">
 									</div>
 								</td>
 								<td>
 									<div>
-										<input size="10" id="ant-h-from-grd" type="number"
+										<input style="width: 7em" id="ant-h-from-grd" type="number"
 											data-parsley-range="[0, 100]">
 									</div>
 								</td>
 								<td>
 									<div>
-										<input size="10" id="feeder-length" type="number"
+										<input style="width: 7em" id="feeder-length" type="number"
 											data-parsley-range="[0, 100]">
-									</div>
+									</div></td>
+								<td>
+									<div>
+										<input style="width: 7em"
+											type="text" id="feeder-type" pattern="\d+\/\d+"
+											data-parsley-pattern-message='should be in the form "1/2"'></div>
+
 								</td>
 								<td>
 									<div>
-										<input size="10" type="text" id="feeder-type"
-											pattern="\d+\/\d+" data-parsley-pattern-message='should be in the form "1/2"'>
-									</div>
-								</td>
-								<td>
-									<div>
-										<select>
-											<option>-- select model</option>
-											<option>BTS3900 WCDMA</option>
+										<select style="height: 21px">
+											<option>
+												-- select model
+											</option>
+											<option>
+												BTS3900 WCDMA
+											</option>
 											<option>DBS3800</option>
 										</select>
+									</div></td>
+								<td>
+									<div>
+										<textarea class="expandable"
+											rows="1" cols="20">
+										</textarea>
 									</div>
+
 								</td>
 								<td>
 									<div>
-										<textarea class="expand" rows="1" cols="20"></textarea>
-									</div>
-								</td>
-								<td>
-									<div>
-										<input type="file" accept="image/*" >
-									</div>
-								</td>
+										<input type="file"
+											accept="image/*"></div></td>
 							</tr>
 
 							<tr>
-								<td>
-									<div>
-										<input size="22" type="text" value="BNL-Damazin -03-W-3681"
-											readonly disabled>
-									</div>
-								</td>
+								<td><input size="22" type="text"
+									value="BNL-Damazin -03-W-3681" readonly disabled></td>
 								<!-- 					<td> -->
-								<!-- 						<div><input size="10" type="text" readonly disabled></div> -->
+								<!-- 						<input type="text" readonly disabled> -->
 								<!-- 					</td> -->
-								<td>
-									<div>
-										<input size="1" type="text" value="21" readonly disabled>
-									</div>
-								</td>
-								<td>
-									<div>
-										<input size="1" type="text" value="3681" readonly disabled>
-									</div>
-								</td>
-								<td>
-									<div>
-										<input size="2" type="text" value="Active" readonly
-											disabled>
-									</div>
-								</td>
+								<td><input size="3" type="text" value="21" readonly
+									disabled></td>
+								<td><input size="1" type="text" value="3681" readonly
+									disabled></td>
+								<td><input size="2" type="text" value="Active" readonly
+									disabled></td>
 
 								<!-- 					USER INPUTS ##################-->
 
-								<td>
-									<div>
-										<input size="10" id="azimuth" required type="number"
-											data-parsley-range="[0, 360]" data-parsely-multiple-of="5">
-									</div>
+								<td><input style="width: 7em" id="azimuth" required
+									type="number" data-parsley-range="[0, 360]"
+									data-parsely-multiple-of="5"></td>
+								<td><input id="fixed-e-tilt" type="checkbox"></td>
+								<td><input style="width: 7em" id="e-tilt" type="number"
+									data-parsley-range="[0, 12]"></td>
+								<td><input style="width: 7em" id="m-tilt" type="number"
+									data-parsley-range="[-10, 20]"></td>
+								<td><input style="width: 7em" id="ant-h-on-pole"
+									type="number" data-parsley-range="[0, 100]"></td>
+								<td><input style="width: 7em" id="ant-h-from-grd"
+									type="number" data-parsley-range="[0, 100]"></td>
+								<td><input style="width: 7em" id="feeder-length"
+									type="number" data-parsley-range="[0, 100]"></td>
+								<td><input style="width: 7em" type="text" id="feeder-type"
+									pattern="\d+\/\d+"
+									data-parsley-pattern-message='should be in the form "1/2"'>
+
 								</td>
-								<td>
-									<div>
-										<input size="10" id="fixed-e-tilt" type="checkbox">
-									</div>
+								<td><select style="height: 21px">
+										<option>-- select model</option>
+										<option>BTS3900 WCDMA</option>
+										<option>DBS3800</option>
+								</select></td>
+								<td><textarea class="expandable" rows="1" cols="20"></textarea>
+
 								</td>
-								<td>
-									<div>
-										<input size="10" id="e-tilt" type="number"
-											data-parsley-range="[0, 12]">
-									</div>
-								</td>
-								<td>
-									<div>
-										<input size="10" id="m-tilt" type="number"
-											data-parsley-range="[-10, 20]">
-									</div>
-								</td>
-								<td>
-									<div>
-										<input size="10" id="ant-h-on-pole" type="number"
-											data-parsley-range="[0, 100]">
-									</div>
-								</td>
-								<td>
-									<div>
-										<input size="10" id="ant-h-from-grd" type="number"
-											data-parsley-range="[0, 100]">
-									</div>
-								</td>
-								<td>
-									<div>
-										<input size="10" id="feeder-length" type="number"
-											data-parsley-range="[0, 100]">
-									</div>
-								</td>
-								<td>
-									<div>
-										<input size="10" type="text" id="feeder-type"
-											pattern="\d+\/\d+">
-									</div>
-								</td>
-								<td>
-									<div>
-										<select>
-											<option>-- select model</option>
-											<option>BTS3900 WCDMA</option>
-											<option>DBS3800</option>
-										</select>
-									</div>
-								</td>
-								<td>
-									<div>
-										<textarea class="expand" rows="1" cols="20"></textarea>
-									</div>
-								</td>
-								<td>
-									<div>
-										<input type="file" accept="image/*" >
-									</div>
-								</td>
+								<td><input type="file" accept="image/*"></td>
 							</tr>
 
 							<tr>
-								<td>
-									<div>
-										<input size="22" type="text" value="BNL-Damazin -03-W-3682"
-											readonly disabled>
-									</div>
-								</td>
+								<td><input size="22" type="text"
+									value="BNL-Damazin -03-W-3682" readonly disabled></td>
 								<!-- 					<td> -->
-								<!-- 						<div><input size="10" type="text" readonly disabled></div> -->
+								<!-- 						<input type="text" readonly disabled> -->
 								<!-- 					</td> -->
-								<td>
-									<div>
-										<input size="1" type="text" value="21" readonly disabled>
-									</div>
-								</td>
-								<td>
-									<div>
-										<input size="1" type="text" value="3682" readonly disabled>
-									</div>
-								</td>
-								<td>
-									<div>
-										<input size="2" type="text" value="Active" readonly disabled>
-									</div>
-								</td>
+								<td><input size="3" type="text" value="21" readonly
+									disabled></td>
+								<td><input size="1" type="text" value="3682" readonly
+									disabled></td>
+								<td><input size="2" type="text" value="Active" readonly
+									disabled></td>
 
 								<!-- 					USER INPUTS ##################-->
 
-								<td>
-									<div>
-										<input size="10" id="azimuth" required type="number"
-											data-parsley-range="[0, 360]" data-parsely-multiple-of="5">
-									</div>
+								<td><input style="width: 7em" id="azimuth" required
+									type="number" data-parsley-range="[0, 360]"
+									data-parsely-multiple-of="5"></td>
+								<td><input id="fixed-e-tilt" type="checkbox"></td>
+								<td><input style="width: 7em" id="e-tilt" type="number"
+									data-parsley-range="[0, 12]"></td>
+								<td><input style="width: 7em" id="m-tilt" type="number"
+									data-parsley-range="[-10, 20]"></td>
+								<td><input style="width: 7em" id="ant-h-on-pole"
+									type="number" data-parsley-range="[0, 100]"></td>
+								<td><input style="width: 7em" id="ant-h-from-grd"
+									type="number" data-parsley-range="[0, 100]"></td>
+								<td><input style="width: 7em" id="feeder-length"
+									type="number" data-parsley-range="[0, 100]"></td>
+								<td><input style="width: 7em" type="text" id="feeder-type"
+									pattern="\d+\/\d+"
+									data-parsley-pattern-message='should be in the form "1/2"'>
+
 								</td>
-								<td>
-									<div>
-										<input size="10" id="fixed-e-tilt" type="checkbox">
-									</div>
+								<td><select style="height: 21px">
+										<option>-- select model</option>
+										<option>BTS3900 WCDMA</option>
+										<option>DBS3800</option>
+								</select></td>
+								<td><textarea class="expandable" rows="1" cols="20"></textarea>
+
 								</td>
-								<td>
-									<div>
-										<input size="10" id="e-tilt" type="number"
-											data-parsley-range="[0, 12]">
-									</div>
-								</td>
-								<td>
-									<div>
-										<input size="10" id="m-tilt" type="number"
-											data-parsley-range="[-10, 20]">
-									</div>
-								</td>
-								<td>
-									<div>
-										<input size="10" id="ant-h-on-pole" type="number"
-											data-parsley-range="[0, 100]">
-									</div>
-								</td>
-								<td>
-									<div>
-										<input size="10" id="ant-h-from-grd" type="number"
-											data-parsley-range="[0, 100]">
-									</div>
-								</td>
-								<td>
-									<div>
-										<input size="10" id="feeder-length" type="number"
-											data-parsley-range="[0, 100]">
-									</div>
-								</td>
-								<td>
-									<div>
-										<input size="10" type="text" id="feeder-type"
-											pattern="\d+\/\d+">
-									</div>
-								</td>
-								<td>
-									<div>
-										<select>
-											<option>-- select model</option>
-											<option>BTS3900 WCDMA</option>
-											<option>DBS3800</option>
-										</select>
-									</div>
-								</td>
-								<td>
-									<div>
-										<textarea class="expandable" rows="1" cols="20"></textarea>
-									</div>
-								</td>
-								<td>
-									<div>
-										<input type="file" accept="image/*" >
-									</div>
-								</td>
+								<td><input type="file" accept="image/*"></td>
 							</tr>
 
 
@@ -440,7 +359,10 @@ tbody{
 					</table>
 				</div>
 				<br>
-				<input class="btn btn-primary" type="submit" value="Submit">
+				<div class="btn-group" role="group" aria-label="...">
+					<button type="submit" class="btn btn-primary">Submit</button>
+					<button type="reset" class="btn btn-default">Reset</button>
+				</div>
 			</form>
 		</div>
 	</div>
