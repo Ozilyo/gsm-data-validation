@@ -37,7 +37,7 @@ public class DomainObject {
 	private Integer Azimuth;
 	private Double M_Tilt;
 	private Double E_Tilt;
-	private Double Antenna_hieght;
+	private Double Antenna_height;
 	private Integer LAC;
 	private Integer SAC;
 	private Integer RAC;
@@ -78,7 +78,7 @@ public class DomainObject {
 				+ CELLNAME + ", Carrier=" + Carrier + ", CFG=" + CFG + ", Activity_State=" + Activity_State
 				+ ", Vendor=" + Vendor + ", Latitude=" + Latitude + ", Longitude=" + Longitude + ", PSC=" + PSC
 				+ ", Azimuth=" + Azimuth + ", M_Tilt=" + M_Tilt + ", E_Tilt=" + E_Tilt + ", Antenna_hieght="
-				+ Antenna_hieght + ", LAC=" + LAC + ", SAC=" + SAC + ", RAC=" + RAC + ", UL_CE=" + UL_CE + ", DL_CE="
+				+ Antenna_height + ", LAC=" + LAC + ", SAC=" + SAC + ", RAC=" + RAC + ", UL_CE=" + UL_CE + ", DL_CE="
 				+ DL_CE + ", HS_PDSCH_Code=" + HS_PDSCH_Code + ", UlFreq=" + UlFreq + ", DlFreq=" + DlFreq
 				+ ", TnlBearerType=" + TnlBearerType + ", IUB_bandwidth=" + IUB_bandwidth + ", MaxPower=" + MaxPower
 				+ ", HSDPA_OpState=" + HSDPA_OpState + ", HSUPA_OpState=" + HSUPA_OpState + ", HSPA_plus=" + HSPA_plus
@@ -92,7 +92,7 @@ public class DomainObject {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((Activity_State == null) ? 0 : Activity_State.hashCode());
-		result = prime * result + ((Antenna_hieght == null) ? 0 : Antenna_hieght.hashCode());
+		result = prime * result + ((Antenna_height == null) ? 0 : Antenna_height.hashCode());
 		result = prime * result + ((Azimuth == null) ? 0 : Azimuth.hashCode());
 		result = prime * result + ((Beam == null) ? 0 : Beam.hashCode());
 		result = prime * result + ((CELLNAME == null) ? 0 : CELLNAME.hashCode());
@@ -146,10 +146,10 @@ public class DomainObject {
 				return false;
 		} else if (!Activity_State.equals(other.Activity_State))
 			return false;
-		if (Antenna_hieght == null) {
-			if (other.Antenna_hieght != null)
+		if (Antenna_height == null) {
+			if (other.Antenna_height != null)
 				return false;
-		} else if (!Antenna_hieght.equals(other.Antenna_hieght))
+		} else if (!Antenna_height.equals(other.Antenna_height))
 			return false;
 		if (Azimuth == null) {
 			if (other.Azimuth != null)
@@ -484,11 +484,11 @@ public class DomainObject {
 	}
 
 	public Double getAntenna_hieght() {
-		return Antenna_hieght;
+		return Antenna_height;
 	}
 
 	public void setAntenna_hieght(Double antenna_hieght) {
-		Antenna_hieght = antenna_hieght;
+		Antenna_height = antenna_hieght;
 	}
 
 	public Integer getLAC() {
