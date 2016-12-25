@@ -6,9 +6,12 @@
 <title>Insert title here</title>
 
 
-<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-<link th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap-flex.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap-reboot.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap-grid.css}" rel="stylesheet" />
 <!-- Latest compiled and minified CSS -->
+<link th:href="@{/css/style.css}" rel="stylesheet" />
 
 
 
@@ -20,36 +23,6 @@
 
 
 <style type="text/css">
-input.parsley-success, select.parsley-success, textarea.parsley-success
-	{
-	color: #468847;
-	background-color: #DFF0D8;
-	border: 1px solid #D6E9C6;
-}
-
-input.parsley-error, select.parsley-error, textarea.parsley-error {
-	color: #B94A48;
-	background-color: #F2DEDE;
-	border: 1px solid #EED3D7;
-}
-
-.parsley-errors-list {
-	margin: 2px 0 3px;
-	padding: 0;
-	list-style-type: none;
-	font-size: 0.8em;
-	line-height: 0.9em;
-	opacity: 0;
-	transition: all .3s ease-in;
-	-o-transition: all .3s ease-in;
-	-moz-transition: all .3s ease-in;
-	-webkit-transition: all .3s ease-in;
-}
-
-.parsley-errors-list.filled {
-	opacity: 1;
-}
-
 td, th {
 	font-size: .8em;
 	text-align: center;
@@ -86,82 +59,75 @@ li>a {
 
 
 </head>
-<body>
+<body >
 	<div class="container-fluid">
 
-		<nav class="navbar navbar-inverse">
-			<div class="container-fluid" style="padding-left: 0px;">
-				<div class="navbar-header">
-					<img alt="STS" src="img/sabal_telcom.png" class="img-thumbnail"
-						width="115" height="50">
-					<!-- 					<a class="navbar-brand" href="#">WebSiteName</a> -->
-				</div>
-				<ul id="nav-elements" class="nav navbar-nav">
-					<li><a href="#">2G Site Level</a></li>
-					<li><a href="#">3G Site Level</a></li>
-					<li><a href="#">2G Cell Level</a></li>
-					<li class="active"><a href="#">3G Cell Level</a></li>
-					<li><a href="#">Antenna Model</a></li>
-					<li><a href="#">Action Tracker</a></li>
-				</ul>
-			</div>
-		</nav>
-
-
+		<div th:replace="fragments/header :: header"></div>
+		
 		<div class="container">
 
 			<div class="page-header">
 				<h1 class="text-center">Site Level</h1>
 			</div>
-			
-			
-			<div>
+
+
+			<div class="w-100">
 				<h4>Search Sites By Name:</h4>
-				<form action="#" th:action="@{/sites/search}">
-					<div class="input-group">
+				<form class="form-inline w-100" action="#" th:action="@{/sites/search}">
+					<div class="input-group w-100">
 						<input type="text" class="form-control" id="search"
-							placeholder="Search..." th:name="siteName"> <span
+							placeholder="Search..." th:name="siteName"> <div
 							class="input-group-btn">
-							<button type="submit" class="btn btn-secondary">
-								<span class="glyphicon glyphicon-search"> </span>
-							</button>
-						</span>
+							<button type="submit" class="btn btn-primary w-100">Search</button>
+						</div>
 					</div>
 				</form>
 				<br>
 			</div>
 
 
-			<div>
-				<h3>Sites List</h3>
-
+			<div >
+				<div class="page-header">
+					<h3>Sites List</h3>
+				</div>
 				<table class="table table-striped">
-					<thead>
+					<thead class="thead-inverse">
 						<th>Site ID</th>
 						<th>Site Name</th>
+						<th>Region</th>
 						<th>Technology</th>
 						<th>Longitude</th>
 						<th>Latitude</th>
 						<th>Type</th>
 						<th>Last Visit</th>
+						<th>Safety Issues</th>
+						<th>Comments</th>
 					</thead>
 					<tbody>
 						<tr th:each="site : ${siteList}">
 							<td align="center"><a href="/site/1"
 								th:href="@{/site/{siteId}(siteId=${site.getSiteId()})}"
 								th:text="*{site.getSiteId()}"> 1 </a></td>
-							<td align="center" th:text="${site.getSiteName()}">N/A</td>
+							<td align="center"><a href="/site/1"
+								th:href="@{/site/{siteId}(siteId=${site.getSiteId()})}"
+								th:text="${site.getSiteName()}"></a></td>
+							<td align="center" th:text="${site.getAddress()}">N/A</td>
 							<td align="center" th:text="${site.getTechnology()}">N/A</td>
 							<td align="center" th:text="${site.getLongitude()}">N/A</td>
 							<td align="center" th:text="${site.getLatitude()}">N/A</td>
 							<td align="center" th:text="${site.getType()}">N/A</td>
 							<td align="center" th:text="${site.getLastVisit()}">N/A</td>
-<!-- 							<td align="center"><a href="/sites/edit/1" -->
-<!-- 								th:href="@{/sites/edit/{siteId}(siteId=${site.getSiteId()})}"> -->
-<!-- 									Edit </a></td> -->
-<!-- 							<td align="center"><a href="/employees/delete/0" -->
-<!-- 								th:href="@{/sites/delete/{siteId}(siteId=${site.getSiteId()})}"> -->
-<!-- 									Delete </a></td> -->
+							<td align="center">
+								<input type="checkbox"
+									th:checked="${site.safeIssues}" readonly disabled />
+							</td>
+							<td align="center" th:text="${site.getComments()}">N/A</td>
+							<!-- 							<td align="center"><a href="/sites/edit/1" -->
+							<!-- 								th:href="@{/sites/edit/{siteId}(siteId=${site.getSiteId()})}"> -->
+							<!-- 									Edit </a></td> -->
+							<!-- 							<td align="center"><a href="/employees/delete/0" -->
+							<!-- 								th:href="@{/sites/delete/{siteId}(siteId=${site.getSiteId()})}"> -->
+							<!-- 									Delete </a></td> -->
 						</tr>
 					</tbody>
 				</table>

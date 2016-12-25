@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport"
+	content="width = device-width, initial-scale = 1.0">
+<!-- <meta charset="ISO-8859-1"> -->
+<title>Insert title here</title>
+
+
+<link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap-flex.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap-reboot.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap-grid.css}" rel="stylesheet" />
+<!-- Latest compiled and minified CSS -->
+<link th:href="@{/css/style.css}" rel="stylesheet" />
+
+
+
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/words.js}"></script>
+<script th:src="@{/js/comparison.js}"></script>
+<script th:src="@{/js/parsley.js}"></script>
+
+<style type="text/css">
+input.parsley-success, select.parsley-success, textarea.parsley-success
+	{
+	color: #468847;
+	background-color: #DFF0D8;
+	border: 1px solid #D6E9C6;
+}
+
+input.parsley-error, select.parsley-error, textarea.parsley-error {
+	color: #B94A48;
+	background-color: #F2DEDE;
+	border: 1px solid #EED3D7;
+}
+
+.parsley-errors-list {
+	margin: 2px 0 3px;
+	padding: 0;
+	list-style-type: none;
+	font-size: 0.8em;
+	line-height: 0.9em;
+	opacity: 0;
+	transition: all .3s ease-in;
+	-o-transition: all .3s ease-in;
+	-moz-transition: all .3s ease-in;
+	-webkit-transition: all .3s ease-in;
+}
+
+.parsley-errors-list.filled {
+	opacity: 1;
+}
+
+td, th {
+	font-size: .8em;
+	text-align: center;
+}
+
+body {
+	background-color: #f2f2f2;
+}
+
+tbody {
+	background-color: #fff;
+}
+
+input {
+	
+}
+
+img {
+	background-color: white;
+	transition:
+}
+
+#nav-elements>li {
+	margin-top: 10px
+}
+
+li>a {
+	font-size: medium;
+	font-variant: small-caps;
+	font-stretch: wider;
+}
+
+#site-form {
+	border-color: black;
+	border: 1px;
+}
+
+input {
+	text-align: center;
+}
+
+label {
+	text-align: center;
+	font-size: small;
+}
+</style>
+
+</head>
+<body>
+	<div class="container-fluid">
+		
+		<div th:replace="fragments/header :: header"></div>
+
+		<div class="container">
+			<div class="page-header">
+				<h2 class="text-center">Site Info</h2>
+			</div>
+			
+			<div id="map" style="margin: 0 15px 15px 15px; height: 500px;"></div>
+			
+			<div id="site-form" class="container-fluid">
+				<form class="form" th:object="${site}" data-parsley-validate>
+					<table class="table table-bordered">
+						<tr>
+							<td><label th:for="*{siteName}">Site Name:</label></td>
+							<td><input type="text" th:field="*{siteName}"
+								class="form-control"></td>
+						</tr>
+
+						<tr>
+							<td><label th:for="*{siteId}">Site ID</label></td>
+							<td><input type="text" class="form-control"
+								th:field="*{siteId}"></td>
+						</tr>
+
+						<tr>
+							<td><label th:for="*{longitude}">Longitude</label></td>
+							<td><input id="lng" type="text" class="form-control"
+								th:field="*{longitude}"></td>
+						</tr>
+
+
+						<tr>
+							<td><label th:for="*{latitude}">Latitude</label></td>
+							<td><input id="lat" type="text" class="form-control"
+								th:field="*{latitude}"></td>
+						</tr>
+
+
+						<tr>
+							<td><label th:for="*{technology}">Technology</label></td>
+							<td><select class="form-control"
+								style="margin: 0 auto; width: 80px">
+									<option
+										th:each="state : ${T(com.interfaceco.validationtool.gsmparams.model.Technology).values()}"
+										th:value="*{{technology}}" th:text="${state}"></option>
+							</select></td>
+						</tr>
+
+						<tr>
+							<td><label th:for="*{type}">Type</label>:</td>
+
+							<td><input type="text" class="form-control"
+								th:field="*{type}">
+						</tr>
+						<tr>
+							<td><label th:for="*{address}">Address</label></td>
+							<td><input type="text" class="form-control"
+								th:field="*{address}">
+						</tr>
+						<tr>
+							<td><label th:for="*{lastVisit}">Last Visit</label></td>
+							<td><input type="text" class="form-control"
+								th:field="*{lastVisit}">
+						</tr>
+						<tr>
+							<td><label th:for="*{safeIssues}">Safety Concerns</label></td>
+							<td align="left"><input
+								onclick="document.getElementById('comments').disabled=!this.checked;"
+								type="checkbox" th:checked="${site.safeIssues}"></td>
+						</tr>
+						<tr>
+							<td><label th:for="*{comments}">Comments</label></td>
+							<td><input id="comments" type="text" class="form-control"
+								disabled th:field="*{comments}">
+						</tr>
+
+					</table>
+
+
+					<div class="btn-group w-100">
+						<div class="btn-group w-100" role="group" aria-label="...">
+							<!-- 									<a class="btn btn-primary" -->
+							<!-- 										th:href="@{/site/edit/{siteId}(siteId=${site.getSiteId()})}"> -->
+							<!-- 									<a class="btn btn-primary" -->
+							<!-- 										th:href="@{/site/submitQuery}"> -->
+							<a class="btn btn-primary w-50" href="#"> Edit </a>
+							<button type="reset" class="btn btn-default w-50">Reset</button>
+						</div>
+					</div>
+
+					</td>
+				</form>
+			</div>
+
+			<br> <br>
+
+		</div>
+	</div>
+	
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDp8UiMRLM06oP0poPz4aoqCgmB0sNuHlk">
+    </script>
+
+
+	<script th:src="@{/js/script.js}"></script>
+	
+	<script type="text/javascript">
+
+window.Parsley
+  .addValidator('multipleOf', {
+    requirementType: 'integer',
+    validateNumber: function(value, requirement) {
+      return 0 === value % requirement;
+    },
+    messages: {
+      en: 'This value should be a multiple of %s',
+      fr: 'Cette valeur doit être un multiple de %s'
+    }
+  });
+  .on('form:submit', function() {
+    return false; // Don't submit form for this demo
+  });
+  
+
+</script>
+
+</body>
+
+</html>

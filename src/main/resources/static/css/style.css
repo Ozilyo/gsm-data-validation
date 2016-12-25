@@ -1,0 +1,141 @@
+@CHARSET "ISO-8859-1";
+
+input.parsley-success, select.parsley-success, textarea.parsley-success
+	{
+	color: #468847;
+	background-color: #DFF0D8;
+	border: 1px solid #D6E9C6;
+}
+
+input.parsley-error, select.parsley-error, textarea.parsley-error {
+	color: #B94A48;
+	background-color: #F2DEDE;
+	border: 1px solid #EED3D7;
+}
+
+.parsley-errors-list {
+	margin: 2px 0 3px;
+	padding: 0;
+	list-style-type: none;
+	font-size: 0.8em;
+	line-height: 0.9em;
+	opacity: 0;
+	transition: all .3s ease-in;
+	-o-transition: all .3s ease-in;
+	-moz-transition: all .3s ease-in;
+	-webkit-transition: all .3s ease-in;
+}
+
+.parsley-errors-list.filled {
+	opacity: 1;
+}
+
+tbody {
+	background-color: #fff;
+}
+
+input {
+	max-width: 100%;
+}
+
+img {
+	background-color: white;
+	transition:
+}
+
+#nav-elements>li {
+	margin-top: 10px
+}
+
+li>a {
+	font-size: medium;
+	font-variant: small-caps;
+	font-stretch: wider;
+}
+
+#site-form {
+	border-color: black;
+	border: 1px;
+}
+
+input {
+	text-align: center;
+	width: 100%;
+}
+
+#map {
+	background-color: black;
+	height: 400px;
+	border: solid;
+}
+
+#data-table td, #data-table th {
+	font-size: .9em;	
+	text-align: center;
+/* 	max-width: 5rem; */
+	padding: 2px;
+}
+
+#data-table th {
+	vertical-align: middle;
+}
+
+.xxsmall-tcell {
+	max-width: 3em;
+	font-size: .7em
+}
+
+#mynav {
+	/* 	float: left; */
+	/* 	margin-left: 100px; */
+	
+}
+
+#logo-container {
+	margin-top: 5px;
+	position: relative;
+	margin-bottom: 1px;
+	border-radius: 5px;
+	background-color: #373A3C;
+	color: white;
+	text-shadow: -1.7px 0 red, 0 1.7px red, 1.7px 0 red, 0 -1.7px red;
+}
+
+#logo-img {
+	display: inline-block;
+	/* 	float: left; */
+	size: inherit;
+}
+
+#logo-name {
+	display: inline-block;
+	position: absolute;
+	bottom: 0px;
+	margin-left: 10px;
+	font-family: 'Raleway';
+	
+}
+
+.page-header {
+	padding-bottom: 9px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #000;
+	text-align: center;
+	color: black;
+	font-family: 'Raleway';
+	text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
+	
+}
+
+body {
+/* 	background-image: url('/img/8.jpg'); */
+}
+
+.w-50 {
+	width: 50%;
+}
+
+.lg-input {
+	width: 210px;
+}

@@ -235,19 +235,7 @@ public class Site {
 
 
 
-//
-//	public Set<Cell> getCells() {
-//		return cells;
-//	}
-//
-//
-//
-//
-//	public void setCells(Set<Cell> cells) {
-//		this.cells = cells;
-//	}
-//	
-//	
+
 	
 	
 }

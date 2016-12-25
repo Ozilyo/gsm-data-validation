@@ -28,9 +28,12 @@ public final class GsmController {
 	@Autowired
 	private CellService cellService;
 
-	private ArrayList<CellsListWrapper> allCellsInForm = new ArrayList<CellsListWrapper>();
-
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value="/")
+	public String login (Model model){
+		return "login";
+	}
+	
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String welcome(Model model) {
 		model.addAttribute("site", new Site());
 		model.addAttribute("siteList", siteService.listAllSites());
@@ -48,7 +51,7 @@ public final class GsmController {
 	public String searchSites(@RequestParam("siteName") String siteName, Model model) {
 		model.addAttribute("site", new Site());
 		model.addAttribute("siteList", siteService.searchBySiteName(siteName));
-		return "sites-found";
+		return "welcome";
 	}
 
 	@RequestMapping(value = "/site/{siteId}")
@@ -75,11 +78,11 @@ public final class GsmController {
 	@RequestMapping(value = "/site/edit/{siteId}")
 	public String displaySiteProfile(@PathVariable("siteId") int id, Model model){
 		model.addAttribute("site", siteService.getSiteBySiteId((long) id));
-		return "site-profile";
+		return "site";
 	}
 	
-	
-	public String editSite(){
+	@RequestMapping(value="/site/submitQuery")
+	public String editSite(@ModelAttribute Site site, Model model){
 		return null;
 	}
 }
