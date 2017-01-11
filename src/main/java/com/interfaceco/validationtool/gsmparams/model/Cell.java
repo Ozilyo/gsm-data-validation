@@ -2,10 +2,9 @@ package com.interfaceco.validationtool.gsmparams.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,6 +24,7 @@ public class Cell {
 	private String cellName;
 	private Integer lac;
 	@Id
+	@Column(unique = true)
 	private Integer cell_id;
 	private Boolean activated;
 	private Integer azimuth;
@@ -36,11 +36,11 @@ public class Cell {
 	private String feeder_type;
 	private String antenna_model;
 	
-	private Integer siteId;
+	private Long siteId;
 	
-//	@ManyToOne
-//	@JoinColumn(name="siteId")
-//	private Site site;
+	@ManyToOne
+	@JoinColumn(name="node_id")
+	private Site site;
 	
 	@Type(type="text")
 	private String comments;
@@ -64,9 +64,9 @@ public class Cell {
 		return "Cell [id=" + id + ", cellName=" + cellName + ", lac=" + lac + ", cell_id=" + cell_id + ", activated="
 				+ activated + ", azimuth=" + azimuth + ", fixed_e_tilt=" + fixed_e_tilt + ", e_tilt=" + e_tilt
 				+ ", m_tilt=" + m_tilt + ", antenna_height=" + antenna_height + ", feeder_length=" + feeder_length
-				+ ", feeder_type=" + feeder_type + ", antenna_model=" + antenna_model + ", siteId=" + siteId
-				+ ", comments=" + comments + ", date_created=" + date_created + ", last_modified=" + last_modified
-				+ "]";
+				+ ", feeder_type=" + feeder_type + ", antenna_model=" + antenna_model + ", siteId=" + siteId + ", site="
+				+ site + ", comments=" + comments + ", date_created=" + date_created + ", last_modified="
+				+ last_modified + "]";
 	}
 
 	
@@ -92,6 +92,7 @@ public class Cell {
 		result = prime * result + ((lac == null) ? 0 : lac.hashCode());
 		result = prime * result + ((last_modified == null) ? 0 : last_modified.hashCode());
 		result = prime * result + ((m_tilt == null) ? 0 : m_tilt.hashCode());
+		result = prime * result + ((site == null) ? 0 : site.hashCode());
 		result = prime * result + ((siteId == null) ? 0 : siteId.hashCode());
 		return result;
 	}
@@ -187,6 +188,11 @@ public class Cell {
 			if (other.m_tilt != null)
 				return false;
 		} else if (!m_tilt.equals(other.m_tilt))
+			return false;
+		if (site == null) {
+			if (other.site != null)
+				return false;
+		} else if (!site.equals(other.site))
 			return false;
 		if (siteId == null) {
 			if (other.siteId != null)
@@ -319,20 +325,18 @@ public class Cell {
 	}
 
 
-//	public Site getSite() {
-//		return site;
-//	}
-//
-//
-//	public void setSite(Site site) {
-//		this.site = site;
-//	}
+	public Site getSite() {
+		return site;
+	}
+	
+	public void setSite(Site site) {
+		this.site = site;
+	}
 
 
 	public String getComments() {
 		return comments;
 	}
-
 
 	public void setComments(String comments) {
 		this.comments = comments;
@@ -343,7 +347,6 @@ public class Cell {
 		return date_created;
 	}
 
-
 	public void setDate_created(Date date_created) {
 		this.date_created = date_created;
 	}
@@ -352,7 +355,6 @@ public class Cell {
 	public Date getLast_modified() {
 		return last_modified;
 	}
-
 
 	public void setLast_modified(Date last_modified) {
 		this.last_modified = last_modified;
@@ -365,9 +367,6 @@ public class Cell {
 		return cellName;
 	}
 
-
-
-
 	public void setCellName(String cellName) {
 		this.cellName = cellName;
 	}
@@ -375,18 +374,19 @@ public class Cell {
 
 
 
-	public Integer getSiteId() {
+	public Long getSiteId() {
 		return siteId;
 	}
 
 
 
 
-	public void setSiteId(Integer siteId) {
+	public void setSiteId(Long siteId) {
 		this.siteId = siteId;
 	}
-	
-	
+
+
+
 	
 	
 }

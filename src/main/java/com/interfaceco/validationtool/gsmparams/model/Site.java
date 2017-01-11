@@ -3,6 +3,7 @@ package com.interfaceco.validationtool.gsmparams.model;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -19,11 +20,13 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public class Site {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+
+//	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	private Technology technology;
 	private String siteName;
+	@Id
+	@Column(name="node_id", unique=true)
 	private long siteId;
 	private double longitude;
 	private double latitude;
@@ -34,22 +37,18 @@ public class Site {
 	@Type(type="text")
 	private String comments;
 	
-//	@OneToMany(mappedBy="site")
-//	private Set<Cell> cells;
-	
+	@OneToMany(mappedBy="site")
+	private Set<Cell> cells;
+
 	@CreatedDate
 	private Date createdOn;
 	@LastModifiedDate
 	private Date lastModified;
 	
 	
-	
-	
 	public Site() {
 		
 	}
-
-
 
 
 	@Override
@@ -232,10 +231,12 @@ public class Site {
 	public void setLastModified(Date lastModified) {
 		this.lastModified = lastModified;
 	}
-
-
-
-
 	
+	public Set<Cell> getCells() {
+		return cells;
+	}
+	public void setCells(Set<Cell> cells) {
+		this.cells = cells;
+	}
 	
 }

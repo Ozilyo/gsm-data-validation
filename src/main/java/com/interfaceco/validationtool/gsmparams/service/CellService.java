@@ -36,7 +36,7 @@ public class CellService {
 		return cellRepository.findAll();
 	}
 	
-	public List<Cell> listCellsInSite(Integer siteId){
+	public Set<Cell> listCellsInSite(Integer siteId){
 		return cellRepository.findBySiteId(siteId);
 	}
 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:batch="http://www.springframework.org/schema/batch"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<import resource="classpath:/batch/loadFromCsvStep.xml" />
+
+	<context:property-placeholder location="classpath:/batch.properties" />
+
+	<bean id="stepScope" class="org.springframework.batch.core.scope.StepScope">
+		<property name="autoProxy" value="true" />
+	</bean>
+
+	<bean id="incrementer"
+		class="org.springframework.batch.core.launch.support.RunIdIncrementer" />
+
+	<bean id="domainObject"
+		class="com.interfaceco.validationtool.gsmparams.model.DomainObject"
+		scope="prototype" />
+
+
+	<batch:job id="loadDB" job-repository="jobRepository"
+		incrementer="incrementer">
+		<batch:step id="loadCellsToDb" parent="loadFromCsvStep"
+			next="loadSitesToDb">
+			<batch:tasklet>
+				<batch:chunk reader="CellReader" />
+			</batch:tasklet>
+		</batch:step>
+
+		<batch:step id="loadSitesToDb" parent="loadFromCsvStep">
+			<batch:tasklet>
+				<batch:chunk reader="SiteReader" processor="siteProcessor" />
+			</batch:tasklet>
+		</batch:step>
+	</batch:job>
+
+
+
+
+	<bean id="dateEditor"
+		class="org.springframework.beans.propertyeditors.CustomDateEditor">
+		<constructor-arg>
+			<bean class="java.text.SimpleDateFormat">
+				<constructor-arg value="yyyy-MM-dd HH:mm" />
+			</bean>
+		</constructor-arg>
+		<constructor-arg value="true" />
+	</bean>
+
+
+
+
+	<!-- USED FOR THE AUDING FEATURE -->
+	<bean id="jpaItemWriter" class="org.springframework.batch.item.database.JpaItemWriter">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+</beans>

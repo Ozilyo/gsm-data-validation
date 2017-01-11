@@ -23,8 +23,19 @@
 
 
 	<batch:job id="loadDB" job-repository="jobRepository"
-		incrementer="incrementer">
-		<batch:step id="loadToDb" parent="loadFromCsvStep"/>
+		incrementer="incrementer" restartable="false">
+		<batch:step id="loadSitesToDb" parent="loadFromCsvStep"
+			next="loadCellsToDb">
+			<batch:tasklet>
+				<batch:chunk reader="SiteReader" />
+			</batch:tasklet>
+		</batch:step>
+
+		<batch:step id="loadCellsToDb" parent="loadFromCsvStep">
+			<batch:tasklet>
+				<batch:chunk reader="CellReader" processor="cellItemProcessor" />
+			</batch:tasklet>
+		</batch:step>
 	</batch:job>
 
 
@@ -47,12 +58,5 @@
 	<bean id="jpaItemWriter" class="org.springframework.batch.item.database.JpaItemWriter">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-
-
-
-	<!-- <bean id="jobExplorer" -->
-	<!-- class="org.springframework.batch.core.explore.support.JobExplorerFactoryBean"> -->
-	<!-- <property name="dataSource" ref="dataSource" /> -->
-	<!-- </bean> -->
 
 </beans>

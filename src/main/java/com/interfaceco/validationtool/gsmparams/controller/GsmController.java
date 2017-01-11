@@ -37,7 +37,7 @@ public final class GsmController {
 	public String welcome(Model model) {
 		model.addAttribute("site", new Site());
 		model.addAttribute("siteList", siteService.listAllSites());
-		return "cell-level";
+		return "cell-level2";
 	}
 
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
@@ -56,16 +56,16 @@ public final class GsmController {
 
 	@RequestMapping(value = "/site/{siteId}")
 	public String displayDataEntryForm(@PathVariable("siteId") long id, Model model) {
-
+		Site site = siteService.getSiteBySiteId(id);
 		CellsListWrapper wrapper = new CellsListWrapper();
-		wrapper.setCellList((ArrayList<Cell>) cellService.listCellsInSite((int) id));
-		System.err.println(wrapper.getCellList().get(1));
+		ArrayList<Cell> cells = new ArrayList<>(site.getCells());
+		wrapper.setCellList(cells);
 		
 		model.addAttribute("wrapper", wrapper);	
-		model.addAttribute("site", siteService.getSiteBySiteId(id));
+		model.addAttribute("site", site);
 //		model.addAttribute("cellsList", cellService.listCellsInSite((int) id));
 //		 model.addAttribute("cell", new Cell());
-		return "cell-level";
+		return "cell-level2";
 	}
 	
 	@RequestMapping(value="/cell/submitQuery",  method=RequestMethod.POST)
