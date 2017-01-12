@@ -26,8 +26,11 @@
 	<!-- </batch:job> -->
 
 
-	<bean id="SiteReader" class="org.springframework.batch.item.file.FlatFileItemReader">
-		<property name="resource" value="${batch.flatfile.resource.location}"></property>
+	<bean id="SiteReader" class="org.springframework.batch.item.file.FlatFileItemReader" scope="step">
+<!-- 	#############    the reader couldn't read the copied file, the problem was fixed by adding 'file:/'?!  ################ -->
+<!-- 	#############    not using 'file:/' -> the resource is loaded from the underlying ApplicationContext, i.e. it must exist before bootstrapping the context    ################ -->
+<!-- 	#############    using 'file:/' -> the resource is loaded as a URL from the File System    ################ -->
+		<property name="resource" value="file:/${storage.location}#{jobParameters['fileName']}"></property>
 
 		<property name="linesToSkip" value="1" />
 
@@ -43,11 +46,13 @@
 
 				<property name="fieldSetMapper" ref="siteFieldSetMapper" />
 			</bean>
+
 		</property>
 	</bean>
 
-	<bean id="CellReader" class="org.springframework.batch.item.file.FlatFileItemReader">
-		<property name="resource" value="${batch.flatfile.resource.location}"></property>
+	<bean id="CellReader" class="org.springframework.batch.item.file.FlatFileItemReader" scope="step">
+		<property name="resource"
+			value="file:/${storage.location}#{jobParameters['fileName']}"></property>
 
 		<property name="linesToSkip" value="1" />
 

@@ -59,10 +59,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 			<div class="w-100"
 				style="margin: 50px 0; padding: 10px 10px; border-radius: 5px; border: solid thin; background-color: #f2f2f2;">
 				<h4>Import data file:</h4>
-				<form class="form-inline w-100" action="#" 
-					th:action="@{/sites/import}">
+				<form class="form-inline w-100" action="#" enctype="multipart/form-data" 
+					th:action="@{/file-upload}" method="post">
 					<div class="input-group w-100">
-						<input id="import" class="form-control" type="file" th:name="siteDataFile">
+						<input id="import" class="form-control" type="file" th:name="file">
 						<div class="input-group-btn">
 							<button type="submit" class="btn btn-primary w-100">Import</button>
 						</div>

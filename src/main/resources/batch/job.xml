@@ -23,7 +23,7 @@
 
 
 	<batch:job id="loadDB" job-repository="jobRepository"
-		incrementer="incrementer" restartable="false">
+		incrementer="incrementer">
 		<batch:step id="loadSitesToDb" parent="loadFromCsvStep"
 			next="loadCellsToDb">
 			<batch:tasklet>

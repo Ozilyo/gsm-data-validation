@@ -54,6 +54,10 @@ dependencies {
     compile ('commons-net:commons-net:3.5')
 	compile('org.apache.poi:poi-ooxml:3.12')
 	
+	
+    compile("org.springframework.boot:spring-boot-devtools")
+    compile("org.springframework.boot:spring-boot-configuration-processor")
+	
     testCompile("junit:junit")
 }
 
