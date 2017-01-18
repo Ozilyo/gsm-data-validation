@@ -33,6 +33,11 @@ public final class GsmController {
 		return "login";
 	}
 	
+	@RequestMapping(value = "/login")
+	public String loginPage(){
+		return "login";
+	}
+	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String welcome(Model model) {
 		model.addAttribute("site", new Site());
@@ -85,4 +90,6 @@ public final class GsmController {
 	public String editSite(@ModelAttribute Site site, Model model){
 		return null;
 	}
+	
+	
 }

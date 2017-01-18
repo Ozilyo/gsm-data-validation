@@ -1,6 +1,7 @@
 package com.interfaceco.validationtool.gsmparams.controller;
 
 import java.nio.file.Files;
+import java.util.Date;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,6 +52,7 @@ public class JobLauncherController {
 		JobParametersBuilder builder = extractParameters(request);
 		
 		builder.addString("fileName", fileName);
+		builder.addDate("Date", new Date());
 		
 		jobLauncher.run(job, builder.toJobParameters());
 		return "redirect:/welcome";
