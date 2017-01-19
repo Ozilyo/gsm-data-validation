@@ -7,21 +7,32 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.interfaceco.validationtool.usermanagement.service.UserDetailsServiceAdapter;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	DataSource dataSource;
-
+	private DataSource dataSource;
+	
+	@Autowired
+	private UserDetailsServiceAdapter userDetailsService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().dataSource(dataSource)
-				.usersByUsernameQuery("select username, password, true " + "from account where username=?")
-				.authoritiesByUsernameQuery("select account.username, role.role_name from account, role "
-						+ "join accounts_roles on (accounts_roles.role_id = role.id) "
-						+ "where account.username=? and accounts_roles.account_id=account.id");
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+//		auth.jdbcAuthentication().dataSource(dataSource)
+//				.usersByUsernameQuery("select username, password, true " + "from account where username=?")
+//				.authoritiesByUsernameQuery("select account.username, role.role_name from account, role "
+//						+ "join accounts_roles on (accounts_roles.role_id = role.id) "
+//						+ "where account.username=? and accounts_roles.account_id=account.id");
 	}
 
 	@Override

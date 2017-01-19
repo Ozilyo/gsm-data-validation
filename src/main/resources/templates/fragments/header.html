@@ -69,10 +69,18 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 							Tracker</a></li>
 					
 				</ul>
+				
+				<ul class="nav navbar-nav float-xs-right" style="margin-left: 20px">
+					<li sec:authorize="#authentication.authenticated" class="nav-item">
+						<a th:href="@{/logout}" class="nav-link">Logout</a>
+					</li>
+				</ul>
+				
 				<form class="form-inline float-xs-right" th:action="@{/sites/search}" >
 					<input class="form-control" type="text" placeholder="Search" th:name="siteName">
 					<button class="btn btn-secondary" type="submit">Search</button>
 				</form>
+				
 				<ul class="nav navbar-nav float-xs-right" style="margin-right: 20px">
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
@@ -82,6 +90,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 							<a class="dropdown-item" href="#">Extract as xlsx</a>
 							<a class="dropdown-item" href="#">Extract as Tab</a>
 						</div></li>
+					<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
+						<a th:href="@{/registration}" class="nav-link">Register new user</a>
+					</li>
 				</ul>
 			</div>
 		</nav>

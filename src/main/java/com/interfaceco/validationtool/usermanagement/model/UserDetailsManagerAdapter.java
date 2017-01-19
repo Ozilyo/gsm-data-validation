@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class UserDetailsManagerAdapter implements UserDetails {
 
 	private Account account;
-//	private String password;
+	private String password;
 
 	public UserDetailsManagerAdapter(Account account) {
 		this.account = account;
@@ -29,9 +29,9 @@ public class UserDetailsManagerAdapter implements UserDetails {
 		return account.getLastName();
 	}
 
-//	public String getFullName() {
-//		return user.getFullName();
-//	}
+	public String getFullName() {
+		return account.getFullName();
+	}
 
 	public String getEmail() {
 		return account.getEmail();

@@ -10,91 +10,88 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Account {
+
+	private long id;
+	private String username;
+	private String password;
+	private String firstName;
+	private String lastName;
+	private String fullName;
+	private String email;
+	private boolean enabled = true;
+	
+	Collection<Role> roles;
+
+	
+	public Account() {}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-//	@Column(name="account_id")
-	long id;
-	@Column(unique=true)
-	private String username;
-	String password;
-	String firstName;
-	String lastName;
-	String email;
+	public long getId() { return id; }
+	public void setId(long account) {
+		this.id = account;
+	}
+
 	
-	boolean enabled;
+	@NotNull
+	@Column(unique=true)
+	public String getUsername() { return username; }
+	public void setUsername(String userName) {
+		this.username = userName;
+	}
+
+	@NotNull
+	@Size(min = 6, max = 50, message="{password.size}")
+	public String getPassword() { return password; }
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@NotNull
+	@Length(min = 1, max = 40, message="{firstName.size}")
+	public String getFirstName() { return firstName; }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	@NotNull
+	@Length(min = 1, max = 40, message="{lastName.size}")
+	public String getLastName() { return lastName; }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	@Transient
+	public String getFullName() { return firstName + " " + lastName; }
+
+	@NotNull(message="email field should not be empty}")
+	@Email
+	public String getEmail() { return email; }
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public boolean isEnabled() { return enabled; }
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 	
 	@ManyToMany
 	@JoinTable( 
 			name = "accounts_roles", 
 			joinColumns = @JoinColumn(name = "account_id", referencedColumnName = "id"),
 			inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-	Collection<Role> roles;
-
-	
-	public Account() {}
-	
-	public long getId() {
-		return id;
-	}
-	public void setId(long account) {
-		this.id = account;
-	}
-
-
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String userName) {
-		this.username = userName;
-	}
-
-
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-	
-	
-	public Collection<Role> getRoles() {
-		return roles;
-	}
+	public Collection<Role> getRoles() { return roles; }
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
 	}
@@ -166,6 +163,13 @@ public class Account {
 		return "Account [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", email=" + email + ", enabled=" + enabled + ", roles=" + roles + "]";
 	}
+	
+	
+	//TODO: to be implemented
+//	public Object getMatchingPassword() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	
 	
 	

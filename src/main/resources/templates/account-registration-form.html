@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta name="viewport"
+	content="width = device-width, initial-scale = 1.0">
+<title>User Registration</title>
+</head>
+<body>
+
+
+	<h2>User Registration Form</h2>
+
+	<br>
+	<div>
+		<form method="POST" action="#" th:action="@{/user/register}"
+			th:object="${account}">
+			<div>
+				<ul>
+					<li style="color: red" th:each="err : ${#fields.errors('*')}"
+						th:text="${err}">Invalid input!</li>
+				</ul>
+			</div>
+
+			<table>
+				<tr th:if="${account.getFirstName() != null}">
+					<td><label th:class="${#fields.hasErrors('id')}? 'error'">ID</label>:
+					</td>
+					<td><input required="true" type="text" disabled="true"
+						readonly="true" th:field="*{id}" /> <input type="hidden"
+						th:field="*{id}" /></td>
+
+				</tr>
+				<tr>
+					<td><label
+						th:class="${#fields.hasErrors('firstName')}? 'error'">First
+							Name</label>:</td>
+					<td><input required="required" type="text"
+						th:field="*{firstName}"
+						th:class="${#fields.hasErrors('firstName')}? 'error'" /></td>
+				</tr>
+
+				<tr>
+					<td><label
+						th:class="${#fields.hasErrors('lastName')}? 'error'">Last
+							Name</label>:</td>
+					<td><input required="required" type="text"
+						th:field="*{lastName}"
+						th:class="${#fields.hasErrors('lastName')}? 'error'" /></td>
+				</tr>
+				
+				<tr>
+					<td><label th:class="${#fields.hasErrors('email')}? 'error' ">Email
+							Address</label>:</td>
+					<td><input required="required" type="text" th:field="*{email}"
+						th:class="${#fields.hasErrors('email')}? 'error'" /></td>
+				</tr>
+
+				<tr>
+					<td><br></td>
+				</tr>
+				<tr>
+					<td><label
+						th:class="${#fields.hasErrors('username')}? 'error' ">Username</label>:</td>
+					<td><input required="required" type="text"
+						th:field="*{username}"
+						th:class="${#fields.hasErrors('username')}? 'error' "></td>
+				</tr>
+
+				<tr>
+					<td><label
+						th:class="${#fields.hasErrors('password')}? 'error' ">Password</label>:</td>
+					<td><input required="required" type="password" name="password"
+						th:class="${#fields.hasErrors('password')}? 'error' "></td>
+				</tr>
+				
+<!-- 				<tr> -->
+<!-- 					<td><label -->
+<!-- 						th:class="${#fields.hasErrors('matchingPassword')}? 'error' ">Re-enter -->
+<!-- 							password</label>:</td> -->
+<!-- 					<td><input required="required" type="password" -->
+<!-- 						th:field="*{matchingPassword}" -->
+<!-- 						th:class="${#fields.hasErrors('matchingPassword')}? 'error' "></td> -->
+<!-- 				</tr> -->
+
+<!-- 				<tr sec:authorize="hasRole('ROLE_ADMIN')"> -->
+<!-- 					<td><label -->
+<!-- 						th:class="${#fields.hasErrors('isAdmin')}? 'error' ">Account -->
+<!-- 							type</label>:</td> -->
+<!-- 					<td><input type="radio" th:field="*{isAdmin}" th:text="Admin" -->
+<!-- 						th:value="true"> <input type="radio" th:field="*{isAdmin}" -->
+<!-- 						th:text="User" th:value="false"></td> -->
+<!-- 				</tr> -->
+
+
+				<tr>
+					<td><button class="Add" type="submit" name="add"
+							th:if="${account.getUsername() == null}" th:text="Add">Add</button>
+						<button class="Add" type="submit" name="edit"
+							th:if="${account.getUsername() != null}" th:text="Edit">Confirm
+							changes</button> <input type="reset" value="Reset"></td>
+
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>
