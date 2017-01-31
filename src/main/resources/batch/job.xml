@@ -58,5 +58,6 @@
 	<bean id="jpaItemWriter" class="org.springframework.batch.item.database.JpaItemWriter">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
+	
 
 </beans>

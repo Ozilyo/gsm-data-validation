@@ -25,6 +25,7 @@ public class UserManegmentController {
 	@GetMapping("/registration")
 	public String goToRegistrationPage(Model model) {
 		model.addAttribute("account", new Account());
+		System.err.println(accountService);
 		return "account-registration-form";
 	}
 

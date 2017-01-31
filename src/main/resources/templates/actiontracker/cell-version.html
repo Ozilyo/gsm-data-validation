@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta name="viewport"
+	content="width = device-width, initial-scale = 1.0">
+<title>STS</title>
+
+
+<link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap-flex.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap-reboot.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap-grid.css}" rel="stylesheet" />
+<!-- Latest compiled and minified CSS -->
+<link th:href="@{/css/style.css}" rel="stylesheet" />
+
+
+
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/words.js}"></script>
+<script th:src="@{/js/comparison.js}"></script>
+<script th:src="@{/js/parsley.js}"></script>
+
+
+</head>
+<body
+	style="background-image: url('/img/12.jpg'); background-attachment: fixed;">
+	<div class="container-fluid">
+
+		<div th:replace="fragments/header :: navbar"></div>
+
+		<div class="container">
+
+						<div class="page-header">
+							<h1 class="text-center"></h1>
+						</div>
+			<div class="table-responsive">
+				<table id="data-table" class="table table-responsive"
+					style="width: 100%;">
+					<thead class="thead-inverse">
+						<tr>
+							<th style="margin: 15px; width: 215px" align="center">Cell Name</th>
+							<th style="margin: 15px;" align="center">LAC</th>
+							<th style="margin: 15px;" align="center">CID</th>
+							<th style="margin: 15px;" align="center">Status</th>
+							<th style="margin: 15px;" align="center">Azimuth</th>
+							<!-- 								<th class="xxsmall-tcell" align="center">Fixed e Tilt</th> -->
+							<th style="margin: 15px;" align="center">E Tilt</th>
+							<th style="margin: 15px;" align="center">M Tilt</th>
+							<th style="margin: 15px;" align="center">Ant. Height on Pole</th>
+							<th style="margin: 15px;" align="center">Ant. Height from Ground</th>
+							<th style="margin: 15px;" align="center">Feeder Length</th>
+							<th style="margin: 15px;" align="center">Feeder Type</th>
+							<!-- 								<th align="center">Ant. Model</th> -->
+							<th style="margin: 15px;" align="center">Comment</th>
+							<th style="margin: 15px;" align="center">Date Modified</th>
+							<th style="margin: 15px;" align="center">Modified By</th>
+							<!-- 								<th align="center">upload pictures</th> -->
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td th:text="${cellOld.getCellName()}"></td>
+							<td th:text="${cellOld.getLac()}"></td>
+							<td th:text="${cellOld.getCell_id()}"></td>
+							<td th:text="Active">Active</td>
+							<!-- ############### TO BE FIXED ################ -->
+							<td th:text="${cellOld.getAzimuth()}"></td>
+							<td th:text="${cellOld.getE_tilt()}"></td>
+							<td th:text="${cellOld.getM_tilt()}"></td>
+							<td th:text="${cellOld.getAntenna_height()}"></td>
+							<td th:text="${cellOld.feeder_length}"></td>
+							<td th:text="${cellOld.feeder_type}"></td>
+							<td th:text="${cellOld.feeder_type}"></td>
+							<td th:text="${cellOld.comments}"></td>
+							<td th:text="${cellOld.last_modified}"></td>
+							<td th:text="${cellOld.lastModifiedBy}"></td>
+						</tr>
+						<tr>
+							<td th:text="${cellNew.getCellName()}"></td>
+							<td th:text="${cellNew.getLac()}"></td>
+							<td th:text="${cellNew.getCell_id()}"></td>
+							<td th:text="Active">Active</td>
+							<!-- ############### TO BE FIXED ################ -->
+							<td th:text="${cellNew.getAzimuth()}"></td>
+							<td th:text="${cellNew.getE_tilt()}"></td>
+							<td th:text="${cellNew.getM_tilt()}"></td>
+							<td th:text="${cellNew.getAntenna_height()}"></td>
+							<td th:text="${cellNew.feeder_length}"></td>
+							<td th:text="${cellNew.feeder_type}"></td>
+							<td th:text="${cellNew.feeder_type}"></td>
+							<td th:text="${cellNew.comments}"></td>
+							<td th:text="${cellNew.last_modified}"></td>
+							<td th:text="${cellNew.lastModifiedBy}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

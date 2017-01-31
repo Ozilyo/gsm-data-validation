@@ -3,6 +3,7 @@ package com.interfaceco.validationtool.gsmparams.model;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -12,18 +13,21 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
+@Audited(withModifiedFlag=true)
 @EntityListeners(AuditingEntityListener.class)
 public class Site {
 	
 
 //	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
-	private Technology technology;
+	private Technology technology = Technology._2G;
 	private String siteName;
 	@Id
 	@Column(name="node_id", unique=true)
@@ -37,11 +41,15 @@ public class Site {
 	@Type(type="text")
 	private String comments;
 	
-	@OneToMany(mappedBy="site")
+	@OneToMany(mappedBy="site",cascade=CascadeType.ALL)
 	private Set<Cell> cells;
 
+	@NotAudited
 	@CreatedDate
+	@Column(updatable=false)
 	private Date createdOn;
+	
+	@NotAudited
 	@LastModifiedDate
 	private Date lastModified;
 	

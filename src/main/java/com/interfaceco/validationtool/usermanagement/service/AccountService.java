@@ -10,4 +10,6 @@ public interface AccountService {
 	boolean registerAccount(Account account, String password, Errors errors) throws UsernameExistsException;
 	
 	Account getAccountByUsername(String username);
+
+	String getCurrentUsername();
 }

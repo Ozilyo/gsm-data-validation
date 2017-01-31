@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta name="viewport"
+	content="width = device-width, initial-scale = 1.0">
+<title>STS</title>
+
+
+<link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap-flex.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap-reboot.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap-grid.css}" rel="stylesheet" />
+<!-- Latest compiled and minified CSS -->
+<link th:href="@{/css/style.css}" rel="stylesheet" />
+
+
+
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/words.js}"></script>
+<script th:src="@{/js/comparison.js}"></script>
+<script th:src="@{/js/parsley.js}"></script>
+
+
+
+</head>
+<body
+	style="background-image: url('/img/12.jpg'); background-attachment: fixed;">
+	<div class="container-fluid">
+
+		<div th:replace="fragments/header :: navbar"></div>
+
+		<div class="container">
+
+			<!-- 			<div class="page-header"> -->
+			<!-- 				<h1 class="text-center">Site Level</h1> -->
+			<!-- 			</div> -->
+
+			<div>
+				<!-- 				<div class="page-header"> -->
+				<!-- 					<h3>Sites List</h3> -->
+				<!-- 				</div> -->
+				<table id="site-table" class="table table-striped">
+					<thead class="thead-inverse">
+						<th style="text-align: center">Revision ID</th>
+						<th style="text-align: center">Date</th>
+						<th style="text-align: center">Edited By</th>
+					</thead>
+					<tbody>
+						<tr th:each="revEntity : ${revisionEntities}">
+							<td align="center"><a 
+								th:href="@{{cellId}/{revNum}(cellId=${cellId}, revNum=${revEntity.id})}"
+								th:text="*{revEntity.id}"> 1 </a></td>
+								
+							<td align="center" th:text="${revEntity.getRevisionDate()}">N/A</td>
+							<td align="center"><a href="/site/1"
+								th:href="@{/site/{siteId}(siteId=${revEntity.username})}"
+								th:text="${revEntity.username}"></a></td>
+							<!-- 							<td align="center"><a href="/sites/edit/1" -->
+							<!-- 								th:href="@{/sites/edit/{siteId}(siteId=${site.getSiteId()})}"> -->
+							<!-- 									Edit </a></td> -->
+							<!-- 							<td align="center"><a href="/employees/delete/0" -->
+							<!-- 								th:href="@{/sites/delete/{siteId}(siteId=${site.getSiteId()})}"> -->
+							<!-- 									Delete </a></td> -->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+	</div>
+</body>
+</html>

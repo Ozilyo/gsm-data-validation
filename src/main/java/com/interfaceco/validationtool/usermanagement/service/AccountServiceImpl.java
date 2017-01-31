@@ -4,8 +4,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
@@ -15,7 +22,9 @@ import com.interfaceco.validationtool.usermanagement.repository.AccountRepositor
 import com.interfaceco.validationtool.usermanagement.repository.RoleRepository;
 import com.interfaceco.validationtool.usermanagement.validation.UsernameExistsException;
 
-@Service
+//@Service
+//@Scope("prototype")
+@Component
 @Transactional(readOnly = true)
 public class AccountServiceImpl implements AccountService {
 
@@ -26,8 +35,17 @@ public class AccountServiceImpl implements AccountService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Bean("passwordEncoder")
+	public PasswordEncoder passwordEncoder(){
+	    PasswordEncoder encoder = new BCryptPasswordEncoder();
+	    return encoder;
+	}
+	
+	
 //	@Autowired
-//    BCryptPasswordEncoder bcryptEncoder;
+//	@Qualifier("passwordEncoder")
+//    BCryptPasswordEncoder passwordEncoder;
 
 	@Override
 	@Transactional(readOnly = false)
@@ -44,6 +62,7 @@ public class AccountServiceImpl implements AccountService {
 			account.setRoles(Arrays.asList(roleRepository.findByRoleName("ROLE_USER")));
 			accountRepository.save(account);
 			String encodedPass = passwordEncoder.encode(password);
+			System.err.println(encodedPass);
 			accountRepository.updateAccountWithPassword(encodedPass, account.getUsername());
 		}
 		return valid;
@@ -62,5 +81,12 @@ public class AccountServiceImpl implements AccountService {
 
 	public boolean userNameExists(String username) {
 		return accountRepository.findByUsername(username) != null;
+	}
+	
+	@Override
+	public String getCurrentUsername(){
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		System.err.println(username);
+		return username;
 	}
 }

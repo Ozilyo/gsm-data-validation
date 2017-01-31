@@ -10,11 +10,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
+@Audited(withModifiedFlag=true)
 @EntityListeners(AuditingEntityListener.class)
 public class Cell {
 	
@@ -38,19 +43,26 @@ public class Cell {
 	
 	private Long siteId;
 	
+	
 	@ManyToOne
-	@JoinColumn(name="node_id")
+	@JoinColumn(name="node_id", updatable=false)
 	private Site site;
 	
 	@Type(type="text")
 	private String comments;
 	
 	@CreatedDate
+	@Column(updatable=false)
 	private Date date_created;
 	
 	@LastModifiedDate
 	private Date last_modified;
-
+	
+	@LastModifiedBy
+	private String lastModifiedBy;
+	
+	@CreatedBy
+	private String createdBy; 
 	
 	public Cell() {
 
@@ -66,7 +78,7 @@ public class Cell {
 				+ ", m_tilt=" + m_tilt + ", antenna_height=" + antenna_height + ", feeder_length=" + feeder_length
 				+ ", feeder_type=" + feeder_type + ", antenna_model=" + antenna_model + ", siteId=" + siteId + ", site="
 				+ site + ", comments=" + comments + ", date_created=" + date_created + ", last_modified="
-				+ last_modified + "]";
+				+ last_modified + ", lastModifiedBy=" + lastModifiedBy + ", createdBy=" + createdBy + "]";
 	}
 
 	
@@ -83,6 +95,7 @@ public class Cell {
 		result = prime * result + ((cellName == null) ? 0 : cellName.hashCode());
 		result = prime * result + ((cell_id == null) ? 0 : cell_id.hashCode());
 		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
+		result = prime * result + ((createdBy == null) ? 0 : createdBy.hashCode());
 		result = prime * result + ((date_created == null) ? 0 : date_created.hashCode());
 		result = prime * result + ((e_tilt == null) ? 0 : e_tilt.hashCode());
 		result = prime * result + ((feeder_length == null) ? 0 : feeder_length.hashCode());
@@ -90,6 +103,7 @@ public class Cell {
 		result = prime * result + ((fixed_e_tilt == null) ? 0 : fixed_e_tilt.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lac == null) ? 0 : lac.hashCode());
+		result = prime * result + ((lastModifiedBy == null) ? 0 : lastModifiedBy.hashCode());
 		result = prime * result + ((last_modified == null) ? 0 : last_modified.hashCode());
 		result = prime * result + ((m_tilt == null) ? 0 : m_tilt.hashCode());
 		result = prime * result + ((site == null) ? 0 : site.hashCode());
@@ -144,6 +158,11 @@ public class Cell {
 				return false;
 		} else if (!comments.equals(other.comments))
 			return false;
+		if (createdBy == null) {
+			if (other.createdBy != null)
+				return false;
+		} else if (!createdBy.equals(other.createdBy))
+			return false;
 		if (date_created == null) {
 			if (other.date_created != null)
 				return false;
@@ -178,6 +197,11 @@ public class Cell {
 			if (other.lac != null)
 				return false;
 		} else if (!lac.equals(other.lac))
+			return false;
+		if (lastModifiedBy == null) {
+			if (other.lastModifiedBy != null)
+				return false;
+		} else if (!lastModifiedBy.equals(other.lastModifiedBy))
 			return false;
 		if (last_modified == null) {
 			if (other.last_modified != null)
@@ -377,12 +401,34 @@ public class Cell {
 	public Long getSiteId() {
 		return siteId;
 	}
-
-
-
-
 	public void setSiteId(Long siteId) {
 		this.siteId = siteId;
+	}
+
+
+	public String getLastModifiedBy() {
+		return lastModifiedBy;
+	}
+
+
+
+
+	public void setLastModifiedBy(String lastModifiedBy) {
+		this.lastModifiedBy = lastModifiedBy;
+	}
+
+
+
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+
+
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 
 

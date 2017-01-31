@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html 
-xmlns:th="http://www.thymeleaf.org" 
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta name="viewport"
 	content="width = device-width, initial-scale = 1.0">
@@ -21,9 +20,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <script th:src="@{/js/jquery.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/words.js}"></script>
-<script th:src="@{/js/comparison.js}"></script>
 <script th:src="@{/js/parsley.js}"></script>
+<!-- <script th:src="@{/js/words.js}"></script> -->
+<script th:src="@{/js/comparison.js}"></script>
 
 
 </head>
@@ -35,104 +34,74 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 		</div>
 		<div id="map-row" class="row" style="padding: 20px 20px 20px 0;">
-			
-<!-- 			<div class="col-md-2"> -->
-<!-- 				<div id="sidebar" class="collapse"></div> -->
-<!-- 			</div> -->
-			
-			
+
+			<!-- 			<div class="col-md-2"> -->
+			<!-- 				<div id="sidebar" class="collapse"></div> -->
+			<!-- 			</div> -->
+
+
 			<div class="col-md-4">
 				<h3>Site Info:</h3>
-					<form class="form" th:object="${site}"
-						data-parsley-validate>
-						<div class="input-group input-group-md">
-							<span class="input-group-addon"
-								style="width: 100px;">
-								Site Name
-							</span>
-							<input id="sitename" type="text" th:field="*{siteName}"
-								class="form-control" disabled>
-						</div>
-						<div class="input-group input-group-md">
-							<span class="input-group-addon"
-								style="width: 100px;">
-								Site ID
-							</span>
-							<input type="text" class="form-control"
-								th:field="*{siteId}" readonly>
-						</div>
-						<div class="input-group input-group-md">
-							<span class="input-group-addon"
-								style="width: 100px;">
-								Longitude
-							</span>
-							<input id="lng" type="text"
-								class="form-control" th:field="*{longitude}" readonly>
-						</div>
-						<div class="input-group input-group-md">
-							<span class="input-group-addon"
-								style="width: 100px;">
-								Latitude
-							</span>
-							<input id="lat" type="text"
-								class="form-control" th:field="*{latitude}" readonly>
-						</div>
-						<div class="input-group input-group-md">
-							<span class="input-group-addon"
-								style="width: 100px;">
-								Technology
-							</span>
-							<input type="text"
-								class="form-control" th:field="*{technology}" readonly>
-						</div>
-						<div class="input-group input-group-md">
-							<span class="input-group-addon"
-								style="width: 100px;">
-								Region
-							</span>
-							<input type="text"
-								class="form-control" th:field="*{address}" readonly>
-						</div>
-						<div class="input-group input-group-md">
-							<span class="input-group-addon"
-								style="width: 100px;">
-								Last Visit
-							</span>
-							<input type="text"
-								class="form-control" th:field="*{lastVisit}" readonly>
-						</div>
-						<div class="input-group input-group-md">
-							<span class="input-group-addon"
-								style="width: 100px;">
-								Type
-							</span>
-							<input type="text"
-								class="form-control" th:field="*{type}" readonly>
-						</div>
-						<div class="input-group input-group-md">
-							<span class="input-group-addon"
-								style="width: 100px;">
-								BTS Type
-							</span>
-							<input type="text"
-								class="form-control" value="BTS3900 WCDMA" readonly>
-						</div>
-						
-						
-						<br>
-						<div class="btn-group w-100" role="group"
-							aria-label="...">
-							<a class="btn btn-primary w-100"
-								th:href="@{/site/edit/{siteId}(siteId=${site.getSiteId()})}">
-								Edit Site
-							</a>
-						</div>
+				<form class="form" th:object="${site}" data-parsley-validate>
+					<div class="input-group input-group-md">
+						<span class="input-group-addon" style="width: 100px;"> Site
+							Name </span> <input id="sitename" type="text" th:field="*{siteName}"
+							class="form-control" disabled>
+					</div>
+					<div class="input-group input-group-md">
+						<span class="input-group-addon" style="width: 100px;"> Site
+							ID </span> <input type="text" class="form-control" th:field="*{siteId}"
+							readonly>
+					</div>
+					<div class="input-group input-group-md">
+						<span class="input-group-addon" style="width: 100px;">
+							Longitude </span> <input id="lng" type="text" class="form-control"
+							th:field="*{longitude}" readonly>
+					</div>
+					<div class="input-group input-group-md">
+						<span class="input-group-addon" style="width: 100px;">
+							Latitude </span> <input id="lat" type="text" class="form-control"
+							th:field="*{latitude}" readonly>
+					</div>
+					<div class="input-group input-group-md">
+						<span class="input-group-addon" style="width: 100px;">
+							Technology </span> <input type="text" class="form-control"
+							th:field="*{technology}" readonly>
+					</div>
+					<div class="input-group input-group-md">
+						<span class="input-group-addon" style="width: 100px;">
+							Region </span> <input type="text" class="form-control"
+							th:field="*{address}" readonly>
+					</div>
+					<div class="input-group input-group-md">
+						<span class="input-group-addon" style="width: 100px;"> Last
+							Visit </span> <input type="text" class="form-control"
+							th:field="*{lastVisit}" readonly>
+					</div>
+					<div class="input-group input-group-md">
+						<span class="input-group-addon" style="width: 100px;"> Type
+						</span> <input type="text" class="form-control" th:field="*{type}"
+							readonly>
+					</div>
+					<div class="input-group input-group-md">
+						<span class="input-group-addon" style="width: 100px;"> BTS
+							Type </span> <input type="text" class="form-control"
+							value="BTS3900 WCDMA" readonly>
+					</div>
 
-					</form>
+
+					<br>
+					<div class="btn-group w-100" role="group" aria-label="...">
+						<a class="btn btn-primary w-100"
+							th:href="@{/site/edit/{siteId}(siteId=${site.getSiteId()})}">
+							Edit Site </a>
+					</div>
+
+				</form>
 			</div>
 			<div id="map" class="col-md-8"></div>
 		</div>
-		
+
 		<div>
 			<form data-parsley-validate method="POST"
 				th:action="@{/cell/submitQuery}" th:object="${wrapper}"
@@ -154,16 +123,16 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 								<th align="center">Ant. Height from Ground</th>
 								<th align="center">Feeder Length</th>
 								<th align="center">Feeder Type</th>
-<!-- 								<th align="center">Ant. Model</th> -->
+								<!-- 								<th align="center">Ant. Model</th> -->
 								<th align="center">Comment</th>
 								<th align="center">upload pictures</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="cell, stat : *{cellList}">
-								<td class="lg-input"><input type="text"
-									th:field="*{cellList[__${stat.index}__].cellName}" readonly
-									disabled><input type="hidden"
+								<td class="lg-input"><a
+									th:href="@{/action-tracker/cell/{id}(id=*{cellList[__${stat.index}__].cell_id})}"
+									th:text="*{cellList[__${stat.index}__].cellName}"> 1 </a><input type="hidden"
 									th:field="*{cellList[__${stat.index}__].cellName}"></td>
 								<!-- 					<td> -->
 								<!-- 						<input type="text" readonly disabled> -->
@@ -215,12 +184,12 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 									data-parsley-pattern-message="should be in the form 'a/b' (eg. 3/4)">
 
 								</td>
-<!-- 								<td><select style="height: 21px; width: 100%" -->
-<!-- 									th:field="*{cellList[__${stat.index}__].antenna_model}"> -->
+								<!-- 								<td><select style="height: 21px; width: 100%" -->
+								<!-- 									th:field="*{cellList[__${stat.index}__].antenna_model}"> -->
 
-<!-- 										<option value="BTS3900 WCDMA">BTS3900 WCDMA</option> -->
-<!-- 										<option value="DBS3800">DBS3800</option> -->
-<!-- 								</select></td> -->
+								<!-- 										<option value="BTS3900 WCDMA">BTS3900 WCDMA</option> -->
+								<!-- 										<option value="DBS3800">DBS3800</option> -->
+								<!-- 								</select></td> -->
 								<td class="lg-input"><textarea class="expandable"
 										th:field="*{cellList[__${stat.index}__].comments}" rows="1"
 										style="width: 100%">
@@ -228,25 +197,29 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 								<td class="lg-input"><input type="file" accept="image/*"
 									style="max-width: 100%"></td>
 
-								<input type="hidden" th:field="*{cellList[__${stat.index}__].siteId}">
+								<input type="hidden"
+									th:field="*{cellList[__${stat.index}__].siteId}">
 							</tr>
 						</tbody>
 					</table>
 				</div>
-				<div class="btn-group w-50" role="group" aria-label="..." style="margin-left: 25%">
+				<div class="btn-group w-50" role="group" aria-label="..."
+					style="margin-left: 25%">
 					<button type="submit" class="btn btn-primary w-50">Submit</button>
 					<button type="reset" class="btn btn-default w-50">Reset</button>
 				</div>
-				<br><br>
+				<br>
+				<br>
 			</form>
 		</div>
 	</div>
-	
-    
+
+
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDp8UiMRLM06oP0poPz4aoqCgmB0sNuHlk">
     </script>
 	<script th:src="@{/js/script.js}"></script>
+
 
 	<script type="text/javascript">
 

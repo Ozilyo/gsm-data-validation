@@ -50,7 +50,7 @@ public class Account {
 	}
 
 	@NotNull
-	@Size(min = 6, max = 50, message="{password.size}")
+	@Size(min = 6, max = 70, message="{password.size}")
 	public String getPassword() { return password; }
 	public void setPassword(String password) {
 		this.password = password;
