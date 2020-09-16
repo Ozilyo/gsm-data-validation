@@ -27,11 +27,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.interfaceco.validationtool.actiontracker.revision.UserRevisionEntity;
+import com.interfaceco.validationtool.config.RevisionEntityRepository;
 import com.interfaceco.validationtool.gsmparams.model.Cell;
 
 //@Service
 @Component
 public class CellRevisionService {
+
+	@Autowired
+	private RevisionEntityRepository revisionEntityRepository;
 
 	// @PersistenceContext
 	// private EntityManager entityManager;
@@ -48,29 +52,29 @@ public class CellRevisionService {
 	// }
 
 	@Autowired
-//	@PersistenceContext(type=PersistenceContextType.TRANSACTION)
+	// @PersistenceContext(type=PersistenceContextType.TRANSACTION)
 	private EntityManager entityManager;
 
 	@Autowired
 	private EntityManagerFactory entityManagerFactory;
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@Bean
 	public AuditReader getAuditReader() {
-//		if (sessionFactory.) {
-//			entityManager.getTransaction().commit();
-//			entityManager.close();
-//			System.err.println(sessionFactory.getCurrentSession().toString());
-//			sessionFactory.getCurrentSession().close();
-//			System.err.println(sessionFactory.getCurrentSession().toString());
-//			System.err.println("in the if condition ....");
-//			Session session = sessionFactory.openSession();
-//			System.err.println(sessionFactory.getCurrentSession().toString());
-//			return AuditReaderFactory.get(session);
-//		}
-		
+		// if (sessionFactory.) {
+		// entityManager.getTransaction().commit();
+		// entityManager.close();
+		// System.err.println(sessionFactory.getCurrentSession().toString());
+		// sessionFactory.getCurrentSession().close();
+		// System.err.println(sessionFactory.getCurrentSession().toString());
+		// System.err.println("in the if condition ....");
+		// Session session = sessionFactory.openSession();
+		// System.err.println(sessionFactory.getCurrentSession().toString());
+		// return AuditReaderFactory.get(session);
+		// }
+
 		return AuditReaderFactory.get(entityManager);
 	}
 
@@ -81,16 +85,16 @@ public class CellRevisionService {
 	// }
 	// return factory.unwrap(SessionFactory.class);
 	// }
-	
+
 	public Collection<UserRevisionEntity> getAllRivisionForEntity(Integer id) {
 		AuditReader reader = AuditReaderFactory.get(sessionFactory.openSession());
 		Set<Number> allCellRevisions = new HashSet<Number>(reader.getRevisions(Cell.class, id));
-//		Collections.sort((List<Number>) allCellRevisions);
+		// Collections.sort((List<Number>) allCellRevisions);
 		Map<Number, UserRevisionEntity> allCellRevEntities = reader.findRevisions(UserRevisionEntity.class,
 				allCellRevisions);
 		System.err.println(allCellRevisions);
 		System.err.println(allCellRevEntities.values());
-//		
+		//
 		Collection<UserRevisionEntity> allCellRevEntitiesAsCollection = new ArrayList<>(allCellRevEntities.values());
 		Collections.sort((List<UserRevisionEntity>) allCellRevEntitiesAsCollection);
 		return allCellRevEntitiesAsCollection;
@@ -113,17 +117,23 @@ public class CellRevisionService {
 		return entities;
 	}
 
+	public List<UserRevisionEntity> getRevisionEntitiesWithUsername(String username) {
 
-	public List<UserRevisionEntity> queryRevisionsWithUsername(String username) {
-		AuditQuery query = getAuditReader().createQuery().forRevisionsOfEntity(UserRevisionEntity.class, false, true);
-		List<UserRevisionEntity> revisionEntities = query.getResultList();
-		
+		List<UserRevisionEntity> revisionEntities = revisionEntityRepository.findByUsernameContaining(username);
+
+		return revisionEntities;
+	}
+
+	public List<UserRevisionEntity> getAllRevisionEntities() {
+
+		List<UserRevisionEntity> revisionEntities = revisionEntityRepository.findAll();
+
 		return revisionEntities;
 	}
 
 	public Cell getCellEditedInRevision(Integer revNum, Integer cellId) {
-		Cell cell = getAuditReader().find(Cell.class, cellId ,revNum);
-		System.err.println("cell: "+cell);
+		Cell cell = getAuditReader().find(Cell.class, cellId, revNum);
+		System.err.println("cell: " + cell);
 		return cell;
 	}
 }

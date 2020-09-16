@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html 
-xmlns:th="http://www.thymeleaf.org" 
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta name="viewport"
 	content="width = device-width, initial-scale = 1.0">
@@ -50,10 +49,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 					</thead>
 					<tbody>
 						<tr th:each="revEntity : ${revisionEntities}">
-							<td align="center"><a 
-								th:href="@{/action-tracker/cell/{cellId}/{revNum}(cellId=${cellId}, revNum=${revEntity.id})}"
-								th:text="*{revEntity.id}"> 1 </a></td>
-								
+							<td align="center"
+								th:text="*{revEntity.id}"> 1</td>
+
 							<td align="center" th:text="${revEntity.getRevisionDate()}">N/A</td>
 							<td align="center"><a href="/site/1"
 								th:href="@{/action-tracker/user/{username}(username=${revEntity.username})}"

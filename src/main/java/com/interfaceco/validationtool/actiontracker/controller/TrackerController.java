@@ -17,6 +17,18 @@ public class TrackerController {
 	@Autowired
 	private CellRevisionService cellRevisionService;
 	
+	@GetMapping
+	public String getAllEdits(Model model){		
+		model.addAttribute("revisionEntities", cellRevisionService.getAllRevisionEntities());
+		return "actiontracker/all-revisions";
+	}
+	
+	@GetMapping(value="/user/{username}")
+	public String getEditsByUser(@PathVariable("username") String username, Model model){
+		model.addAttribute("revisionEntities", cellRevisionService.getRevisionEntitiesWithUsername(username));
+		return "actiontracker/all-revisions";
+	}
+	
 	@GetMapping(value="/cell/{cellId}")
 	public String getLastEdits(@PathVariable("cellId") Integer cellId, Model model){
 		model.addAttribute("cellVersions", cellRevisionService.getAllVersionsForCell(cellId));

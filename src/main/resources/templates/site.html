@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html 
-xmlns:th="http://www.thymeleaf.org" 
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta name="viewport"
 	content="width = device-width, initial-scale = 1.0">
@@ -103,8 +102,9 @@ label {
 </style>
 
 </head>
-<body style="background-image: url('/img/12.jpg'); background-attachment: fixed;">
-	
+<body
+	style="background-image: url('/img/12.jpg'); background-attachment: fixed;">
+
 	<div class="container-fluid">
 
 		<div th:replace="fragments/header :: navbar"></div>
@@ -117,7 +117,7 @@ label {
 			<div id="map" style="margin: 0 15px 15px 15px; height: 500px;"></div>
 
 			<div id="site-form" class="container-fluid">
-				<form class="form" th:object="${site}" data-parsley-validate>
+				<form class="form" th:action="@{/site/submitQuery}" th:object="${site}" data-parsley-validate>
 					<table class="table table-bordered">
 						<tr>
 							<td><label th:for="*{siteName}">Site Name:</label></td>
@@ -127,7 +127,7 @@ label {
 
 						<tr>
 							<td><label th:for="*{siteId}">Site ID</label></td>
-							<td><input type="text" class="form-control"
+							<td><input type="number" class="form-control"
 								th:field="*{siteId}"></td>
 						</tr>
 
@@ -140,7 +140,7 @@ label {
 
 						<tr>
 							<td><label th:for="*{latitude}">Latitude</label></td>
-							<td><input id="lat" type="text" class="form-control"
+							<td><input id="lat" type="number" class="form-control"
 								th:field="*{latitude}"></td>
 						</tr>
 
@@ -166,7 +166,7 @@ label {
 
 							<td><select class="form-control"
 								style="margin: 0 auto; width: 175px">
-									
+
 									<option value="BTS3900 WCDMA">BTS3900 WCDMA</option>
 									<option value="DBS3800">DBS3800</option>
 							</select></td>
@@ -202,12 +202,12 @@ label {
 							<!-- 										th:href="@{/site/edit/{siteId}(siteId=${site.getSiteId()})}"> -->
 							<!-- 									<a class="btn btn-primary" -->
 							<!-- 										th:href="@{/site/submitQuery}"> -->
-							<a class="btn btn-primary w-50" href="#"> Edit </a>
+							
+							<button type="submit" class="btn btn-primary w-50">Submit</button>
 							<button type="reset" class="btn btn-default w-50">Reset</button>
 						</div>
 					</div>
 
-					</td>
 				</form>
 			</div>
 

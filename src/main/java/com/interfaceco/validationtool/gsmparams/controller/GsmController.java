@@ -1,14 +1,13 @@
 package com.interfaceco.validationtool.gsmparams.controller;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,7 +68,7 @@ public final class GsmController {
 		model.addAttribute("wrapper", wrapper);	
 		model.addAttribute("site", site);
 //		model.addAttribute("cellsList", cellService.listCellsInSite((int) id));
-//		 model.addAttribute("cell", new Cell());
+//		model.addAttribute("cell", new Cell());
 		return "cell-level2";
 	}
 	
@@ -86,9 +85,10 @@ public final class GsmController {
 		return "site";
 	}
 	
-	@RequestMapping(value="/site/submitQuery")
+	@PostMapping(value="/site/submitQuery")
 	public String editSite(@ModelAttribute Site site, Model model){
-		return null;
+		siteService.addSite(site);
+		return "redirect:/welcome";
 	}
 	
 	
